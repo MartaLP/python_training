@@ -17,10 +17,10 @@ def start_stop_jpg(file):
 
 def generate_photos(file):
     jpg_locators = start_stop_jpg(file)
+    if not os.path.exists('restored_photos'):
+        os.makedirs('restored_photos')
     for jpg in jpg_locators:
         photo = file[jpg[0]:jpg[1]]
-        if not os.path.exists('restored_photos'):
-            os.makedirs('restored_photos')
         new_file = open('restored_photos/photo_{}_{}.jpg'.format(jpg[0],jpg[1]), 'wb')
         new_file.write(photo)
         new_file.close()
