@@ -15,7 +15,8 @@ def start_stop_jpg(file):
     #print(jpg_loc)
     return jpg_loc
 
-def generate_photos(file, jpg_locators):
+def generate_photos(file):
+    jpg_locators = start_stop_jpg(file)
     for jpg in jpg_locators:
         photo = file[jpg[0]:jpg[1]]
         if not os.path.exists('restored_photos'):
@@ -27,7 +28,6 @@ def generate_photos(file, jpg_locators):
 def restore_photos(binary_file):
     with open(binary_file, 'rb') as file:
         file_content = file.read()
-        jpg_locators = start_stop_jpg(file_content)
-        generate_photos(file_content, jpg_locators)
+        generate_photos(file_content)
 
 restore_photos('treasure_inside')
