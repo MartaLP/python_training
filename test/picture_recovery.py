@@ -14,20 +14,20 @@ def find_pic_positions(text):
             if pos_start == -1 or pos_end == -1:
                 break
             else:
-                #  check whether there is additional sof between the start and end of the file
+                # check whether there is additional sof between the start and end of the file
                 if text.find(file_type[1], pos_start+1, pos_end) != -1:
                     pos_end = text.find(file_type[1], pos_start+1, pos_end)
                     continue
                 pos_end = pos_end + len(file_type[2]) -1
                 pic_positions.append((file_type[0],pos_start,pos_end))
-    if pic_positions == []:
+    if not pic_positions:
         print('Files could not be found. Sorry!')
         exit()
     else:
         return pic_positions
 
 def generate_pictures(text):
-    # create a list with file types and their positions, e.g. [('png', 0,10), ('jpg', 11,50), ...]
+    # create a list with file types and their positions, e.g. [('png', 0,10), ...]
     pic_positions = find_pic_positions(text)
     # create a folder for new files if it does not exist
     if not os.path.exists('restored_pictures'):
